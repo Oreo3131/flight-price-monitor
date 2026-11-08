@@ -92,6 +92,6 @@ notifier:
   push_drop_min: 50
   push_rise_min: 100
   serverchan:
-    enabled: false
+    enabled: true
     send_key: ""
     channel: ""
