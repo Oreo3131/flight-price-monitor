@@ -1,0 +1,97 @@
+routes:
+  # ===== 日本线（试水，跑一次看数据是否正常）=====
+  - from: SHA
+    from_name: 上海虹桥
+    to: NRT
+    to_name: 东京成田
+    dates:
+      - "2027-01-15"
+      - "2027-01-22"
+      - "2027-02-05"
+    alert_threshold: 2500
+
+  # ===== 国内冬季线 =====
+  - from: SHA
+    from_name: 上海虹桥
+    to: HRB
+    to_name: 哈尔滨
+    dates:
+      - "2026-12-20"
+      - "2027-01-10"
+      - "2027-01-17"
+      - "2027-02-01"
+    alert_threshold: 1200
+
+  - from: SHA
+    from_name: 上海虹桥
+    to: YNJ
+    to_name: 延吉
+    dates:
+      - "2027-01-10"
+      - "2027-01-17"
+    alert_threshold: 1300
+
+  - from: SHA
+    from_name: 上海虹桥
+    to: SYX
+    to_name: 三亚
+    dates:
+      - "2027-01-15"
+      - "2027-02-05"
+    alert_threshold: 1600
+
+  - from: SHA
+    from_name: 上海虹桥
+    to: LJG
+    to_name: 丽江
+    dates:
+      - "2026-12-15"
+      - "2027-01-10"
+    alert_threshold: 900
+
+  - from: SHA
+    from_name: 上海虹桥
+    to: KMG
+    to_name: 昆明
+    dates:
+      - "2026-12-15"
+      - "2027-01-10"
+    alert_threshold: 900
+
+  - from: SHA
+    from_name: 上海虹桥
+    to: JHG
+    to_name: 西双版纳
+    dates:
+      - "2027-01-15"
+      - "2027-02-05"
+    alert_threshold: 1200
+
+platforms:
+  - fliggy
+  - qunar
+  - tuniu
+
+schedule:
+  interval_minutes: 240      # 航线多了拉长间隔，避免被平台风控
+  jitter_minutes: 60
+  run_on_start: true
+
+crawler:
+  headless: true
+  timeout_seconds: 45
+  delay_min: 8
+  delay_max: 20
+  debug: false
+
+output:
+  db_path: data/prices.db
+  log_path: logs/monitor.log
+
+notifier:
+  push_drop_min: 50
+  push_rise_min: 100
+  serverchan:
+    enabled: false
+    send_key: ""
+    channel: ""
